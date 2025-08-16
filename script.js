@@ -348,11 +348,11 @@ class SentenSnake {
             // Show answer
             answerDisplay.textContent = this.targetSentence.toUpperCase();
             answerDisplay.classList.remove('hidden');
-            revealButton.textContent = 'Hide Answer';
+            revealButton.innerText = 'Hide Answer';
         } else {
             // Hide answer
             answerDisplay.classList.add('hidden');
-            revealButton.textContent = 'Reveal Answer';
+            revealButton.innerText = 'Reveal Answer';
         }
     }
 }
