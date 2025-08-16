@@ -342,8 +342,18 @@ class SentenSnake {
     
     revealAnswer() {
         const answerDisplay = document.getElementById('answer-display');
-        answerDisplay.textContent = this.targetSentence.toUpperCase();
-        answerDisplay.classList.remove('hidden');
+        const revealButton = document.getElementById('reveal-answer');
+        
+        if (answerDisplay.classList.contains('hidden')) {
+            // Show answer
+            answerDisplay.textContent = this.targetSentence.toUpperCase();
+            answerDisplay.classList.remove('hidden');
+            revealButton.textContent = 'Hide Answer';
+        } else {
+            // Hide answer
+            answerDisplay.classList.add('hidden');
+            revealButton.textContent = 'Reveal Answer';
+        }
     }
 }
 
