@@ -118,9 +118,32 @@ class SentenSnake {
         for (let i = 0; i < letters.length && i < path.length; i++) {
             const [row, col] = path[i];
             
-            // Calculate arrow direction to next letter
+            // Calculate arrow direction to next letter or add markers for start/end
             let arrow = '';
-            if (i < path.length - 1) {
+            if (i === 0) {
+                // First letter - add a start indicator before the arrow
+                if (path.length > 1) {
+                    const [nextRow, nextCol] = path[i + 1];
+                    const deltaRow = nextRow - row;
+                    const deltaCol = nextCol - col;
+                    
+                    let direction = '';
+                    if (deltaRow === -1 && deltaCol === 0) direction = '↑';      // up
+                    else if (deltaRow === 1 && deltaCol === 0) direction = '↓';  // down
+                    else if (deltaRow === 0 && deltaCol === -1) direction = '←'; // left
+                    else if (deltaRow === 0 && deltaCol === 1) direction = '→';  // right
+                    else if (deltaRow === -1 && deltaCol === -1) direction = '↖'; // up-left
+                    else if (deltaRow === -1 && deltaCol === 1) direction = '↗';  // up-right
+                    else if (deltaRow === 1 && deltaCol === -1) direction = '↙';  // down-left
+                    else if (deltaRow === 1 && deltaCol === 1) direction = '↘';   // down-right
+                    
+                    arrow = '▶' + direction;  // Start marker plus arrow
+                }
+            } else if (i === path.length - 1 || i === letters.length - 1) {
+                // Last letter - add bullet point
+                arrow = '•';
+            } else {
+                // Middle letters - just show arrow to next
                 const [nextRow, nextCol] = path[i + 1];
                 const deltaRow = nextRow - row;
                 const deltaCol = nextCol - col;
